@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PHY</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 40px; 
+            background-color: rgb(238, 206, 206);
+            color: brown; 
+        }
+
+        input { 
+            padding: 5px; 
+            margin: 5px; 
+            border-radius: 30px; 
+        }
+
+        button { 
+            padding: 8px 15px; 
+            color: brown; 
+            background-color: rgb(207, 156, 132); 
+            border-radius: 30px; 
+            cursor: pointer;
+        }
+
+        #textoResultado { 
+            margin-top: 15px; 
+            font-size: 18px; 
+            white-space: pre-line;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>CEP CORREIOS</h2>
+
+    <div>
+        <input id="campoCep" placeholder="Digite o CEP">
+    </div>
+
+    <button onclick="obterEndereco()">Consultar</button> 
+
+    <div id="textoResultado"></div>
+
+    <script> 
+        function salvarDados(cep) {
+            fetch(FIREBASE_URL, {
+                method: "PUT",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ cep:cep })
+            });
+        }
+
+        function carregarDdos ( ) {
+            fetch(FIREBASE_URL)
+            .then(r => r.json ())
+            .then(dados => {
+                if (dados && dados.cep) {
+                    document.getElementById("campoCEP").value = dados.cep;
+                    obterEndereco(dados.cep);
+                }
+            });
+        }
+
+        function obterEndereco() {
+            const cep = document.getElementById("campoCep").value.replace(/\D/g, "");
+
+            if (!cep || cep.length !== 8) {
+                document.getElementById("textoResultado").innerText = 
+                "Digite um CEP válido com 8 dígitos.";
+                return;
+            }
+
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(res => res.json())
+                .then(dados => {
+                    if (dados.erro) {
+                        document.getElementById("textoResultado").innerText = 
+                        "CEP não encontrado.";
+                        return;
+                    }
+
+                    document.getElementById("textoResultado").innerText = 
+                        "CEP: " + dados.cep + "\n" +
+                        "Logradouro: " + dados.logradouro + "\n" +
+                        "Bairro: " + dados.bairro + "\n" +
+                        "Cidade: " + dados.localidade + "\n" +
+                        "Estado: " + dados.uf;
+                })
+                .catch(() => {
+                    document.getElementById("textoResultado").innerText = 
+                    "Erro ao encontrar o CEP.";
+                });
+        }
+    </script>
+
+</body>
+</html>
