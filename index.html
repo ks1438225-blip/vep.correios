@@ -2,40 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>PHY</title>
+    <title>CEP</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            margin: 40px; 
-            background-color: rgb(238, 206, 206);
-            color: brown; 
-        }
-
-        input { 
-            padding: 5px; 
-            margin: 5px; 
-            border-radius: 30px; 
-        }
-
-        button { 
-            padding: 8px 15px; 
-            color: brown; 
-            background-color: rgb(207, 156, 132); 
-            border-radius: 30px; 
-            cursor: pointer;
-        }
-
-        #textoResultado { 
-            margin-top: 15px; 
-            font-size: 18px; 
-            white-space: pre-line;
-        }
+        
     </style>
 </head>
-
+     <link rel="stylesheet" href="style.css">
 <body>
-    <h2>CEP CORREIOS</h2>
+    <h2>Consulte o CEP desejado aqui</h2>
 
     <div>
         <input id="campoCep" placeholder="Digite o CEP">
@@ -46,6 +20,8 @@
     <div id="textoResultado"></div>
 
     <script> 
+        const FIREBASE_URL = "https://climatempo-gio-default-asia-southeast1.firebasedatakauanebase.app/cep/.json"
+
         function salvarDados(cep) {
             fetch(FIREBASE_URL, {
                 method: "PUT",
@@ -96,6 +72,5 @@
                 });
         }
     </script>
-
 </body>
 </html>
