@@ -1,28 +1,20 @@
-🔎 Consulta de CEP | Web App
+Consulta de CEP
 
-Aplicação web desenvolvida com HTML, CSS e JavaScript que realiza consulta de endereços a partir de um CEP utilizando a API pública do ViaCEP.
+Este é um projeto simples em HTML, CSS e JavaScript que permite ao usuário consultar informações de um CEP utilizando a API pública do ViaCEP.
 
-O projeto demonstra integração com API externa, manipulação de DOM, validação de dados e tratamento de erros.
+Além disso, o projeto possui integração com Firebase Realtime Database para salvar o último CEP consultado.
 
-🌐 Demonstração
-
-💡 Sugestão: publique no GitHub Pages e coloque o link aqui.
-Exemplo:
-
-https://seuusuario.github.io/consulta-cep/
 🚀 Funcionalidades
 
-✔ Validação de CEP (8 dígitos obrigatórios)
+🔎 Consulta de CEP digitado pelo usuário
 
-✔ Requisição assíncrona utilizando fetch
+📡 Consumo da API ViaCEP
 
-✔ Consumo de API REST
+💾 Salvamento do CEP no Firebase
 
-✔ Exibição dinâmica dos dados no DOM
+✅ Validação de CEP (8 dígitos obrigatórios)
 
-✔ Tratamento de erros (CEP inválido, não encontrado ou erro de conexão)
-
-✔ Estrutura preparada para integração com Firebase
+⚠️ Tratamento de erros (CEP inválido ou não encontrado)
 
 🛠️ Tecnologias Utilizadas
 
@@ -30,56 +22,59 @@ HTML5
 
 CSS3
 
-JavaScript (ES6+)
+JavaScript
 
-API REST (ViaCEP)
+API pública do ViaCEP
 
-Fetch API
+Firebase Realtime Database
 
-📸 Preview da Aplicação
-
-(Adicione aqui um print da tela do projeto)
-
-📷 Dica:
-Tire um print da aplicação rodando e salve como:
-screenshot.png
-Depois adicione no README:
-
-![Preview da Aplicação](screenshot.png)
 📂 Estrutura do Projeto
-📦 consulta-cep
- ├── index.html
- └── README.md
-⚙️ Como Executar Localmente
-# 1. Clone o repositório
-git clone https://github.com/seuusuario/consulta-cep.git
+📁 projeto-cep
+│── index.html
+│── style.css
+│── README.md
+🌐 API Utilizada
 
-# 2. Acesse a pasta
-cd consulta-cep
+O projeto utiliza a API pública:
 
-# 3. Abra o arquivo index.html no navegador
-💡 Conceitos Aplicados
+🔗 https://viacep.com.br
 
-Manipulação do DOM
+Exemplo de requisição:
 
-Programação assíncrona com Promises
+https://viacep.com.br/ws/01001000/json/
+🔥 Integração com Firebase
 
-Consumo de API externa
+O projeto utiliza Firebase para armazenar o último CEP consultado.
 
-Validação de entrada de dados
+const FIREBASE_URL = "https://climatempo-gio-default-asia-southeast1.firebasedatakauanebase.app/cep/.json"
+Funções principais:
 
-Tratamento de exceções
+salvarDados(cep) → Salva o CEP no banco
 
-Organização de código frontend
+carregarDdos() → Recupera o CEP salvo
 
-🔮 Melhorias Futuras
+obterEndereco() → Consulta o endereço na API
 
-Implementar máscara automática no campo de CEP
+⚠️ Observações Importantes
 
-Adicionar loading spinner
+O CEP deve conter 8 dígitos numéricos.
 
-Melhorar responsividade (mobile-first)
+Caso o CEP não exista, será exibida uma mensagem de erro.
 
-Deploy automatizado
+É necessário ter um banco configurado no Firebase para o salvamento funcionar corretamente.
 
-Integração completa com Firebase
+Há um pequeno erro no código:
+
+campoCEP deve ser campoCep
+
+carregarDdos pode ser corrigido para carregarDados
+
+▶️ Como Executar
+
+1.Baixe os arquivos do projeto.
+
+2.Abra o arquivo index.html no navegador.
+
+3.Digite um CEP válido.
+
+4.Clique em Consultar.
